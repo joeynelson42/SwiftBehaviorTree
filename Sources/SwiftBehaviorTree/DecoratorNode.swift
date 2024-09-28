@@ -13,7 +13,7 @@ open class DecoratorNode<Blackboard>: BehaviorNode<Blackboard> {
     
     public var child: Child?
     
-    init(child: Child) {
+    public init(child: Child) {
         self.child = child
     }
     

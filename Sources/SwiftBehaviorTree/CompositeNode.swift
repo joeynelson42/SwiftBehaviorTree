@@ -25,7 +25,7 @@ open class CompositeNode<Blackboard>: BehaviorNode<Blackboard> {
         self.children = children
     }
     
-    init(_ children: Child...) {
+    public init(_ children: Child...) {
         self.children = children
     }
     
