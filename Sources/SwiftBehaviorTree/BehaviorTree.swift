@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Tickable {
+public protocol Tickable {
     func tick()
 }
 
@@ -28,7 +28,7 @@ public final class BehaviorTree<Blackboard>: Tickable {
     
     private var isFinished: Bool = false
     
-    func tick() {
+    public func tick() {
         guard !isFinished else { return }
         let status = rootNode.tick(with: blackboard)
 
