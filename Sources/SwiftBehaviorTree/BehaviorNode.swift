@@ -23,15 +23,15 @@ public protocol BehaviorNodeDelegate {
 
 open class BehaviorNode<Blackboard> {
     
-    var id: UUID = UUID()
+    open var id: UUID = UUID()
     
-    var name: String { "" }
+    open var name: String { "" }
     
-    var delegate: BehaviorNodeDelegate?
+    public var delegate: BehaviorNodeDelegate?
     
-    init() {}
+    public init() {}
     
-    func initialize(with blackboard: Blackboard, delegate: BehaviorNodeDelegate?) {
+    open func initialize(with blackboard: Blackboard, delegate: BehaviorNodeDelegate?) {
         self.delegate = delegate
     }
     
