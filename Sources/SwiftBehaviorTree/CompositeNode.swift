@@ -7,21 +7,21 @@
 
 import Foundation
 
-public class CompositeNode<Blackboard>: BehaviorNode<Blackboard> {
+open class CompositeNode<Blackboard>: BehaviorNode<Blackboard> {
     
-    typealias Child = BehaviorNode<Blackboard>
+    public typealias Child = BehaviorNode<Blackboard>
     
-    var children: [Child] = []
+    public var children: [Child] = []
     
     var currentNodeIndex: Int = 0
     
-    override func initialize(with blackboard: Blackboard, delegate: BehaviorNodeDelegate? = nil) {
+    open override func initialize(with blackboard: Blackboard, delegate: BehaviorNodeDelegate? = nil) {
         super.initialize(with: blackboard, delegate: delegate)
         currentNodeIndex = 0
         children.forEach { $0.initialize(with: blackboard, delegate: delegate) }
     }
     
-    required init(children: [Child] = []) {
+    public required init(children: [Child] = []) {
         self.children = children
     }
     
@@ -49,12 +49,12 @@ public class CompositeNode<Blackboard>: BehaviorNode<Blackboard> {
         }
     }
     
-    override func onAbort(with blackboard: Blackboard) {
+    open override func onAbort(with blackboard: Blackboard) {
         currentNodeIndex = 0
         children.forEach { $0.onAbort(with: blackboard) }
     }
     
-    override func addChild(_ behaviorNode: Child) throws {
+    open override func addChild(_ behaviorNode: Child) throws {
         if children.contains(where: { $0.id == behaviorNode.id }) {
             throw BehaviorNodeError.childNodeHasParent
         } else {
@@ -62,11 +62,11 @@ public class CompositeNode<Blackboard>: BehaviorNode<Blackboard> {
         }
     }
     
-    override func removeChild(_ behaviorNode: Child) throws {
+    open override func removeChild(_ behaviorNode: Child) throws {
         children.removeAll(where: { $0.id == behaviorNode.id })
     }
     
-    override func removeChildren() throws {
+    open override func removeChildren() throws {
         children.removeAll()
     }
 }
@@ -76,7 +76,7 @@ public final class SelectorNode<Blackboard>: CompositeNode<Blackboard> {
     
 //    override var name: String { "Selector" }
     
-    override func tick(with blackboard: Blackboard) -> BehaviorStatus {
+    public override func tick(with blackboard: Blackboard) -> BehaviorStatus {
         return tick(with: blackboard, endCondition: .success)
     }
 }
@@ -86,7 +86,7 @@ public final class SequenceNode<Blackboard>: CompositeNode<Blackboard> {
     
 //    override var name: String { "Sequence" }
     
-    override func tick(with blackboard: Blackboard) -> BehaviorStatus {
+    public override func tick(with blackboard: Blackboard) -> BehaviorStatus {
         return tick(with: blackboard, endCondition: .failure)
     }
 }

@@ -18,7 +18,7 @@ public final class BehaviorTree<Blackboard>: Tickable {
     
     private var rootNode: BehaviorNode<Blackboard>
     
-    init(blackboard: Blackboard, rootNode: BehaviorNode<Blackboard>, delegate: BehaviorNodeDelegate?) {
+    public init(blackboard: Blackboard, rootNode: BehaviorNode<Blackboard>, delegate: BehaviorNodeDelegate?) {
         self.blackboard = blackboard
         self.rootNode = rootNode
         self.delegate = delegate

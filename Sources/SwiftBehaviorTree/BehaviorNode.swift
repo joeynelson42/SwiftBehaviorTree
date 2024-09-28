@@ -21,7 +21,7 @@ public protocol BehaviorNodeDelegate {
     
 }
 
-public class BehaviorNode<Blackboard> {
+open class BehaviorNode<Blackboard> {
     
     var id: UUID = UUID()
     
@@ -36,21 +36,21 @@ public class BehaviorNode<Blackboard> {
     }
     
     @discardableResult
-    func tick(with blackboard: Blackboard) -> BehaviorStatus {
+    open func tick(with blackboard: Blackboard) -> BehaviorStatus {
         delegate?.didTick(nodeName: name)
         return .failure
     }
     
-    func onAbort(with blackboard: Blackboard) {}
+    open func onAbort(with blackboard: Blackboard) {}
     
-    func addChild(_ behaviorNode: BehaviorNode) throws {}
+    open func addChild(_ behaviorNode: BehaviorNode) throws {}
     
-    func removeChild(_ behaviorNode: BehaviorNode) throws {}
+    open func removeChild(_ behaviorNode: BehaviorNode) throws {}
     
-    func removeChildren() throws {}
+    open func removeChildren() throws {}
 }
 
-extension BehaviorNode {
+public extension BehaviorNode {
     static func == (lhs: BehaviorNode, rhs: BehaviorNode) -> Bool {
         return lhs.id == rhs.id
     }
